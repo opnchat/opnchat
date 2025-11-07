@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin Dashboard</title>
+
+    <!-- Mantém identidade do projeto -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dash.css">
+    <link rel="shortcut icon" href="assets/logo_opn_chat.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container admin-container">
+        <!-- Lateral: reaproveita look da nav-sidebar do projeto -->
+        <aside class="nav-sidebar admin-sidebar">
+            <div class="nav-icons">
+                <button class="nav-icon active" title="Dashboard" id="navDash" aria-label="Dashboard">
+                    <!-- mantém ícone do dashboard -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 13h8V3H3v10zM13 21h8V11h-8v10zM13 3v6h8V3h-8zM3 21h8v-6H3v6z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <button class="nav-icon" title="Editar Usuários" id="navUsers" aria-label="Editar Usuários">
+                    <!-- ícone: usuário com lápis (edição de usuário) -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 20a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17.5 6.5l2 2L11 17l-2.5.5.5-2.5L17.5 6.5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <button class="nav-icon" title="Editar Grupos" id="navGroups" aria-label="Editar Grupos">
+                    <!-- ícone: grupo com lápis (edição de grupo) -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M8 11a3 3 0 100-6 3 3 0 000 6zM16 9a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 21a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 14l4 4M18 14l-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/> 
+                    </svg>
+                </button>
+            </div>
+
+            <div class="user-avatar-container">
+                <button class="user-avatar-btn" title="Meu Perfil">
+                    <div class="user-avatar">A</div>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <div class="header-actions">
+                    <button id="btnNewUser" class="btn small">+ Novo Usuário</button>
+                    <button id="btnNewGroup" class="btn small">+ Novo Grupo</button>
+                    <button id="btnNewDepartment" class="btn small">+ Novo Departamento</button>
+                </div>
+            </header>
+
+            <section class="stats-row" aria-live="polite">
+                <div class="stat-card stat-users">
+                    <div class="stat-body">
+                        <div class="stat-title">Usuários</div>
+                        <div class="stat-value" id="statUsers">—</div>
+                        <div class="stat-sub">Registrados</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span class="stat-accent users-accent" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 12a4 4 0 100-8 4 4 0 000 8zM3 21a9 9 0 0118 0" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-groups">
+                    <div class="stat-body">
+                        <div class="stat-title">Grupos</div>
+                        <div class="stat-value" id="statGroups">—</div>
+                        <div class="stat-sub">Ativos</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span class="stat-accent groups-accent" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M17 11a3 3 0 10-6 0M7 11a3 3 0 100-6 3 3 0 000 6zM2 21a7 7 0 0114 0" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-departments">
+                    <div class="stat-body">
+                        <div class="stat-title">Departamentos</div>
+                        <div class="stat-value" id="statDepartments">—</div>
+                        <div class="stat-sub">Ativos</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span class="stat-accent departments-accent" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M3 21h18V3H3v18zM7 7h2M7 11h2M11 7h2M11 11h2M7 15h8" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card stat-messages">
+                    <div class="stat-body">
+                        <div class="stat-title">Mensagens</div>
+                        <div class="stat-value" id="statMessages">—</div>
+                        <div class="stat-sub">Últimas 24h</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span class="stat-accent messages-accent" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lists-row">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Usuários</h2>
+                        <input id="userSearch" class="input-sm" placeholder="Pesquisar usuário">
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" id="usersTable">
+                            <thead>
+                                <tr><th>Nome</th><th>Email</th><th>Grupos</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody>
+                                <!-- preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Grupos</h2>
+                        <input id="groupSearch" class="input-sm" placeholder="Pesquisar grupo">
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" id="groupsTable">
+                            <thead>
+                                <tr><th>Nome</th><th>Membros</th><th>Visibilidade</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody>
+                                <!-- preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal simples para editar/criar (frontend apenas) -->
+    <div id="modal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+            <h3 id="modalTitle">Editar</h3>
+            <form id="modalForm">
+                <!-- Campos de usuário -->
+                <div id="userFields">
+                    <div class="form-row">
+                        <label>Nome Completo do usuário</label>
+                        <input type="text" id="mFullName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Nome visível no chat</label>
+                        <input type="text" id="mVisibleName" placeholder="Apelido / nome curto">
+                    </div>
+
+                    <div class="form-row">
+                        <label>Matrícula</label>
+                        <input type="text" id="mMatricula">
+                    </div>
+
+                    <div class="form-row">
+                        <label>Email</label>
+                        <input type="email" id="mEmail">
+                    </div>
+
+                    <div class="form-row">
+                        <label>Departamento</label>
+                        <input type="text" id="mDepartment">
+                    </div>
+
+                    <div class="form-row">
+                        <label>Visível para todos?</label>
+                        <label style="display:flex;align-items:center;gap:8px;">
+                            <input type="checkbox" id="mVisibleAll" checked> Sim (marque para visível)
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Foto de Perfil</label>
+                        <input type="file" id="mPhoto" accept="image/*">
+                        <img id="mPhotoPreview" src="" alt="preview" style="display:none;width:60px;height:60px;border-radius:8px;margin-top:8px;object-fit:cover">
+                    </div>
+                </div>
+
+                <!-- Campos de grupo (apresentados apenas quando tipo = group) -->
+                <div id="groupFields" style="display:none">
+                    <div class="form-row">
+                        <label>Nome do Grupo</label>
+                        <input type="text" id="mGroupName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Grupo Público?</label>
+                        <label style="display:flex;align-items:center;gap:8px;">
+                            <input type="checkbox" id="mGroupPublic"> Sim (marcar para público)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Campos de departamento (apresentados apenas quando tipo = department) -->
+                <div id="departmentFields" style="display:none">
+                    <div class="form-row">
+                        <label>Nome do Departamento</label>
+                        <input type="text" id="mDepartmentName" required>
+                    </div>
+                </div>
+
+                <div class="form-row actions">
+                    <button type="submit" class="btn">Salvar</button>
+                    <button type="button" class="btn ghost" id="modalCancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/dash.js"></script>
+</body>
+</html>
