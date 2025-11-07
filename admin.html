@@ -7,7 +7,7 @@
 
     <!-- Mantém identidade do projeto -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dash.css">
+    <link rel="stylesheet" href="css/admin.css">
     <link rel="shortcut icon" href="assets/logo_opn_chat.png" type="image/x-icon">
 </head>
 <body>
@@ -22,21 +22,33 @@
                     </svg>
                 </button>
 
-                <button class="nav-icon" title="Editar Usuários" id="navUsers" aria-label="Editar Usuários">
-                    <!-- ícone: usuário com lápis (edição de usuário) -->
+                <button class="nav-icon" title="Cadastrar Usuário" id="navCreateUser" aria-label="Cadastrar Usuário">
+                    <!-- ícone: usuário com símbolo de adicionar (cadastrar usuário) -->
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M4 20a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M17.5 6.5l2 2L11 17l-2.5.5.5-2.5L17.5 6.5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19 8v4M21 10h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
 
-                <button class="nav-icon" title="Editar Grupos" id="navGroups" aria-label="Editar Grupos">
-                    <!-- ícone: grupo com lápis (edição de grupo) -->
+                <button class="nav-icon" title="Cadastrar Grupo" id="navCreateGroup" aria-label="Cadastrar Grupo">
+                    <!-- ícone: grupo com símbolo de adicionar (cadastrar grupo) -->
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M8 11a3 3 0 100-6 3 3 0 000 6zM16 9a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M2 21a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 14l4 4M18 14l-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/> 
+                        <path d="M19 14v4M21 16h-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <button class="nav-icon" title="Cadastrar Departamento" id="navCreateDepartment" aria-label="Cadastrar Departamento">
+                    <!-- ícone: pasta com '+' (cadastro de departamento) -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <!-- pasta -->
+                        <path d="M3 8.5h6l2 2h10v8H3v-10z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- aba da pasta -->
+                        <path d="M3 8.5V7a1 1 0 011-1h5l2 2H21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- sinal de '+' indicando criação (posicionado dentro/à direita da pasta) -->
+                        <path d="M16 13v4M14 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
             </div>
@@ -51,15 +63,15 @@
         <!-- Conteúdo principal -->
         <main class="admin-main">
             <header class="admin-header">
-                <h1>Admin Dashboard</h1>
+                <h1 id="pageTitle">Admin Dashboard</h1>
                 <div class="header-actions">
-                    <button id="btnNewUser" class="btn small">+ Novo Usuário</button>
-                    <button id="btnNewGroup" class="btn small">+ Novo Grupo</button>
-                    <button id="btnNewDepartment" class="btn small">+ Novo Departamento</button>
+                    <!-- Botões removidos conforme solicitado -->
                 </div>
             </header>
 
-            <section class="stats-row" aria-live="polite">
+            <!-- VIEWS: dashboard (padrão) e telas de cadastro -->
+            <section id="viewDashboard">
+                <div class="stats-row" aria-live="polite">
                 <div class="stat-card stat-users">
                     <div class="stat-body">
                         <div class="stat-title">Usuários</div>
@@ -119,9 +131,9 @@
                         </span>
                     </div>
                 </div>
-            </section>
+                </div>
 
-            <section class="lists-row">
+                <section class="lists-row">
                 <div class="panel">
                     <div class="panel-header">
                         <h2>Usuários</h2>
@@ -153,6 +165,87 @@
                                 <!-- preenchido via JS -->
                             </tbody>
                         </table>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Tela: Cadastrar Usuário -->
+            <section id="viewCreateUser" style="display:none">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Cadastrar Usuário</h2>
+                    </div>
+                    <div class="panel-body">
+                        <form id="createUserForm">
+                            <div class="form-row">
+                                <label>Nome Completo</label>
+                                <input type="text" id="cFullName" required>
+                            </div>
+                            <div class="form-row">
+                                <label>Nome visível</label>
+                                <input type="text" id="cVisibleName">
+                            </div>
+                            <div class="form-row">
+                                <label>Email</label>
+                                <input type="email" id="cEmail">
+                            </div>
+                            <div class="form-row">
+                                <label>Departamento</label>
+                                <input type="text" id="cDepartment">
+                            </div>
+                            <div class="form-row actions">
+                                <button type="submit" class="btn">Salvar</button>
+                                <button type="button" class="btn ghost" id="cUserCancel">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tela: Cadastrar Grupo -->
+            <section id="viewCreateGroup" style="display:none">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Cadastrar Grupo</h2>
+                    </div>
+                    <div class="panel-body">
+                        <form id="createGroupForm">
+                            <div class="form-row">
+                                <label>Nome do Grupo</label>
+                                <input type="text" id="cGroupName" required>
+                            </div>
+                            <div class="form-row">
+                                <label>Grupo Público?</label>
+                                <label style="display:flex;align-items:center;gap:8px;">
+                                    <input type="checkbox" id="cGroupPublic"> Sim
+                                </label>
+                            </div>
+                            <div class="form-row actions">
+                                <button type="submit" class="btn">Salvar</button>
+                                <button type="button" class="btn ghost" id="cGroupCancel">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tela: Cadastrar Departamento -->
+            <section id="viewCreateDepartment" style="display:none">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Cadastrar Departamento</h2>
+                    </div>
+                    <div class="panel-body">
+                        <form id="createDepartmentForm">
+                            <div class="form-row">
+                                <label>Nome do Departamento</label>
+                                <input type="text" id="cDepartmentName" required>
+                            </div>
+                            <div class="form-row actions">
+                                <button type="submit" class="btn">Salvar</button>
+                                <button type="button" class="btn ghost" id="cDepartmentCancel">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </section>
@@ -237,6 +330,6 @@
         </div>
     </div>
 
-    <script src="js/dash.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>

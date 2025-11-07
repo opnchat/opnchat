@@ -137,6 +137,83 @@
 .modal-content .form-row input[type="email"],
 .modal-content .form-row input[type="file"]{ padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); font-size:14px; background:#fff; color:#111827; }
 
+/* ==========================
+   Formatos consistentes para as telas de cadastro (panels)
+   ========================== */
+.panel .form-row{ margin-bottom:14px; display:flex; flex-direction:column; }
+.panel .form-row label{ font-size:13px; color:var(--muted); margin-bottom:8px; }
+.panel .form-row input[type="text"],
+.panel .form-row input[type="email"],
+.panel .form-row input[type="password"],
+.panel .form-row input[type="file"],
+.panel .form-row select,
+.panel .form-row textarea{
+    padding:10px 12px;
+    border-radius:10px;
+    border:1px solid rgba(15,23,42,0.06);
+    font-size:14px;
+    background:var(--panel);
+    color:#0f172a;
+    transition: box-shadow 120ms ease, border-color 120ms ease, transform 90ms ease;
+    /* reduzir largura para aproximadamente metade do espaço disponível */
+    max-width:48%;
+    box-sizing:border-box;
+}
+
+.panel .form-row textarea{ min-height:90px; resize:vertical; }
+
+/* estado focus/hover para inputs — mantém identidade com accent */
+.panel .form-row input:focus,
+.panel .form-row select:focus,
+.panel .form-row textarea:focus{
+    outline:none;
+    border-color: rgba(67,87,193,0.9);
+    box-shadow: 0 6px 18px rgba(67,87,193,0.06);
+    transform: translateY(-1px);
+}
+
+/* placeholder e helpers */
+.panel .form-row input::placeholder,
+.panel .form-row textarea::placeholder{ color: #9CA3AF; }
+
+/* checkbox/radio visual parity */
+.panel .form-row input[type="checkbox"],
+.panel .form-row input[type="radio"]{ width:18px; height:18px; accent-color: var(--accent); }
+
+/* ações do formulário dentro de panels (alinha como no modal) */
+.panel .form-row.actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:8px; }
+.panel .form-row.actions .btn{
+    /* largura menor, altura maior: largura fixa reduzida e altura aumentada */
+    width:56px;
+    min-width:56px;
+    height:40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 8px;
+    font-size:13px;
+    line-height:1.1;
+}
+
+/* pequenos ajustes responsivos */
+@media (max-width:900px){
+    .panel .form-row{ margin-bottom:12px; }
+    .panel .form-row input[type="text"], .panel .form-row select{ font-size:13px; }
+}
+
+/* garantir que em telas pequenas os campos voltem a ocupar 100% */
+@media (max-width:600px){
+    .panel .form-row input[type="text"],
+    .panel .form-row input[type="email"],
+    .panel .form-row input[type="password"],
+    .panel .form-row input[type="file"],
+    .panel .form-row select,
+    .panel .form-row textarea{
+        max-width:100%;
+    }
+    .panel .form-row.actions .btn{ min-width:100px; }
+}
+
 /* checkbox */
 .modal-content .form-row input[type="checkbox"]{ transform:scale(1); }
 
@@ -145,7 +222,21 @@
 
 /* ações alinhadas */
 .modal-content .form-row.actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:6px; }
-.modal-content .btn{ min-width:120px; }
+.modal-content .btn{
+    /* largura menor, altura maior para modais */
+    width:64px;
+    min-width:64px;
+    height:40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 10px;
+    font-size:13px;
+    line-height:1.1;
+}
+
+/* ajustes para botões ghost (manter compactação) */
+.panel .form-row.actions .btn.ghost, .modal-content .btn.ghost{ padding:4px 6px; }
 
 /* garantia mobile */
 @media (max-width:520px){

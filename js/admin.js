@@ -162,10 +162,8 @@
     modalClose.addEventListener('click', closeModal);
     modalCancel.addEventListener('click', closeModal);
 
-    // abrir formulários de novo usuário/grupo/departamento
-    el('btnNewUser').addEventListener('click', () => openModal('Novo usuário', { type: 'user' }));
-    el('btnNewGroup').addEventListener('click', () => openModal('Novo grupo', { type: 'group' }));
-    el('btnNewDepartment').addEventListener('click', () => openModal('Novo departamento', { type: 'department' }));
+    // NOTE: os botões de "+ Novo ..." no header foram removidos;
+    // se desejar reativar via sidebar, adicionar listeners referenciando os novos IDs.
 
     // preview de foto
     const mPhotoInput = document.getElementById('mPhoto');
@@ -272,4 +270,142 @@
 
     // inicialização
     renderAll();
+})();
+
+// --- Navegação entre views via ícones da sidebar (admin) ---
+(function(){
+    // helper
+    const el = id => document.getElementById(id);
+    const navIds = ['navDash','navCreateUser','navCreateGroup','navCreateDepartment'];
+
+    function clearActiveIcons(){
+        document.querySelectorAll('.nav-icon').forEach(i=>i.classList.remove('active'));
+    }
+
+    function showOnly(viewId, title){
+        // todas as views que criamos
+        const views = ['viewDashboard','viewCreateUser','viewCreateGroup','viewCreateDepartment'];
+        views.forEach(v => {
+            const elv = document.getElementById(v);
+            if(!elv) return;
+            elv.style.display = (v === viewId) ? '' : 'none';
+        });
+
+        // atualiza título no header (mantendo posição)
+        const pageTitle = document.getElementById('pageTitle');
+        if(pageTitle) pageTitle.textContent = title || 'Admin Dashboard';
+
+        // quando dashboard for mostrado, re-renderiza estatísticas/listas
+        if(viewId === 'viewDashboard'){
+            // renderAll está no escopo superior
+            try{ renderAll(); } catch(e){}
+        }
+    }
+
+    // Attaches listeners to nav icons
+    function setupNavIcons(){
+        const navDash = el('navDash');
+        const navCreateUser = el('navCreateUser');
+        const navCreateGroup = el('navCreateGroup');
+        const navCreateDepartment = el('navCreateDepartment');
+
+        if(navDash){ navDash.addEventListener('click', ()=>{
+            clearActiveIcons(); navDash.classList.add('active'); showOnly('viewDashboard','Admin Dashboard');
+        }); }
+
+        if(navCreateUser){ navCreateUser.addEventListener('click', ()=>{
+            clearActiveIcons(); navCreateUser.classList.add('active'); showOnly('viewCreateUser','Cadastrar Usuário');
+        }); }
+
+        if(navCreateGroup){ navCreateGroup.addEventListener('click', ()=>{
+            clearActiveIcons(); navCreateGroup.classList.add('active'); showOnly('viewCreateGroup','Cadastrar Grupo');
+        }); }
+
+        if(navCreateDepartment){ navCreateDepartment.addEventListener('click', ()=>{
+            clearActiveIcons(); navCreateDepartment.classList.add('active'); showOnly('viewCreateDepartment','Cadastrar Departamento');
+        }); }
+    }
+
+    // Form handlers for the create views
+    function setupCreateForms(){
+        const createUserForm = el('createUserForm');
+        if(createUserForm){
+            createUserForm.addEventListener('submit', (e)=>{
+                e.preventDefault();
+                const name = el('cFullName').value.trim();
+                const visibleName = el('cVisibleName').value.trim() || name;
+                const email = el('cEmail').value.trim();
+                const department = el('cDepartment').value.trim();
+                if(!name){ alert('Preencha o nome'); return; }
+                // cria usuário fictício (compatível com estrutura existente)
+                try{
+                    const usersRef = window.users || null;
+                    if(Array.isArray(usersRef)){
+                        const newId = usersRef.length ? Math.max(...usersRef.map(u=>u.id)) + 1 : 1;
+                        usersRef.push({ id: newId, name, visibleName, matricula: '', email, department, visibleToAll: true, photo: '', groups: [], active: true });
+                    }
+                } catch(e){}
+                // atualiza e volta ao dashboard
+                try{ renderAll(); } catch(e){}
+                // ativa dashboard icon
+                clearActiveIcons(); el('navDash') && el('navDash').classList.add('active');
+                showOnly('viewDashboard','Admin Dashboard');
+                createUserForm.reset();
+            });
+            el('cUserCancel').addEventListener('click', ()=>{
+                clearActiveIcons(); el('navDash') && el('navDash').classList.add('active'); showOnly('viewDashboard','Admin Dashboard');
+            });
+        }
+
+        const createGroupForm = el('createGroupForm');
+        if(createGroupForm){
+            createGroupForm.addEventListener('submit', (e)=>{
+                e.preventDefault();
+                const name = el('cGroupName').value.trim();
+                const isPublic = el('cGroupPublic').checked;
+                if(!name){ alert('Preencha o nome do grupo'); return; }
+                try{
+                    const groupsRef = window.groups || null;
+                    if(Array.isArray(groupsRef)){
+                        const newId = 'g' + (groupsRef.length ? (Math.max(...groupsRef.map(g=>parseInt((g.id||'').replace(/\D/g,''))||0)) + 1) : 1);
+                        groupsRef.push({ id: newId, name, members: 0, visibility: isPublic ? 'Público' : 'Privado' });
+                    }
+                } catch(e){}
+                try{ renderAll(); } catch(e){}
+                clearActiveIcons(); el('navDash') && el('navDash').classList.add('active'); showOnly('viewDashboard','Admin Dashboard');
+                createGroupForm.reset();
+            });
+            el('cGroupCancel').addEventListener('click', ()=>{
+                clearActiveIcons(); el('navDash') && el('navDash').classList.add('active'); showOnly('viewDashboard','Admin Dashboard');
+            });
+        }
+
+        const createDepartmentForm = el('createDepartmentForm');
+        if(createDepartmentForm){
+            createDepartmentForm.addEventListener('submit', (e)=>{
+                e.preventDefault();
+                const name = el('cDepartmentName').value.trim();
+                if(!name){ alert('Preencha o nome do departamento'); return; }
+                try{
+                    const departmentsRef = window.departments || null;
+                    if(Array.isArray(departmentsRef)){
+                        const newId = 'd' + (departmentsRef.length ? (Math.max(...departmentsRef.map(d=>parseInt((d.id||'').replace(/\D/g,''))||0)) + 1) : 1);
+                        departmentsRef.push({ id: newId, name });
+                    }
+                } catch(e){}
+                try{ renderAll(); } catch(e){}
+                clearActiveIcons(); el('navDash') && el('navDash').classList.add('active'); showOnly('viewDashboard','Admin Dashboard');
+                createDepartmentForm.reset();
+            });
+            el('cDepartmentCancel').addEventListener('click', ()=>{
+                clearActiveIcons(); el('navDash') && el('navDash').classList.add('active'); showOnly('viewDashboard','Admin Dashboard');
+            });
+        }
+    }
+
+    // Inicializa: define dashboard como view ativa por padrão
+    document.addEventListener('DOMContentLoaded', ()=>{
+        try{ setupNavIcons(); setupCreateForms(); clearActiveIcons(); document.getElementById('navDash') && document.getElementById('navDash').classList.add('active'); showOnly('viewDashboard','Admin Dashboard'); }catch(e){}
+    });
+
 })();
