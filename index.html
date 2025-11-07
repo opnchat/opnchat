@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPN Chat</title>
     <link rel="stylesheet" href="css/style.css">
-        <link rel="shortcut icon" href="assets/logo_opn_chat.png" type="image/x-icon">
-
+    <link rel="shortcut icon" href="assets/logo_opn_chat.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
@@ -29,6 +28,33 @@
                         <circle cx="8" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+                </button>
+            </div>
+
+            <!-- Avatar do usuário na parte inferior -->
+            <div class="user-avatar-container">
+                <button class="user-avatar-btn" id="userAvatarBtn" title="Meu Perfil">
+                    <div class="user-avatar">A</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Popup de Perfil -->
+        <div class="profile-popup" id="profilePopup">
+            <div class="profile-popup-content">
+                <div class="profile-header">
+                    <div class="profile-avatar">A</div>
+                    <div class="profile-info">
+                        <h3 class="profile-name">Admin User</h3>
+                        <p class="profile-department">Tecnologia da Informação</p>
+                    </div>
+                </div>
+                <div class="profile-divider"></div>
+                <button class="profile-logout-btn" id="logoutBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Sair do Sistema
                 </button>
             </div>
         </div>
@@ -55,16 +81,13 @@
         <div class="chat-area">
             <div class="welcome-screen" id="welcomeScreen">
                 <div class="welcome-content">
-                    
-
-                    <!--ICONE CENTRAL APP-->
-               
-
-
-
-                    <h1 style="display: flex;"> By: opnchat <div class="icon-center-app"><svg class="chat-icon" viewBox="0 0 24 24">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg></div></h1>
+                    <h1 style="display: flex;"> By: opnchat 
+                        <div class="icon-center-app">
+                            <svg class="chat-icon" viewBox="0 0 24 24">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                    </h1>
                     <p style="text-align: left; margin-top: -15px;">www.opnchat.com.br</p>
                 </div>
             </div>

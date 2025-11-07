@@ -27,6 +27,7 @@ body {
     flex-direction: column;
     border-right: 1px solid #e0e0e0;
     padding-top: 20px;
+    position: relative;
 }
 
 .nav-icons {
@@ -64,6 +65,148 @@ body {
 .nav-icon svg {
     width: 24px;
     height: 24px;
+}
+
+/* Avatar do Usuário na Barra Lateral */
+.user-avatar-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.user-avatar-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5d74db 0%, #4C63D2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    border: 3px solid #e8ebf9;
+    box-shadow: 0 2px 8px rgba(76, 99, 210, 0.3);
+}
+
+/* Popup de Perfil */
+.profile-popup {
+    position: fixed;
+    display: none;
+    left: 70px;
+    bottom: 20px;
+    z-index: 1000;
+    animation: slideInLeft 0.3s ease;
+}
+
+.profile-popup.active {
+    display: block;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.profile-popup-content {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    width: 300px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.profile-header {
+    padding: 20px;
+    background: linear-gradient(135deg, #4C63D2 0%, #3d50b8 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5d74db 0%, #6d82e5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+}
+
+.profile-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-department {
+    font-size: 13px;
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-divider {
+    height: 1px;
+    background: #e0e0e0;
+}
+
+.profile-logout-btn {
+    width: 100%;
+    padding: 16px 20px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #d32f2f;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.2s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-logout-btn:hover {
+    background: #ffebee;
+}
+
+.profile-logout-btn svg {
+    flex-shrink: 0;
 }
 
 /* SIDEBAR */
@@ -353,11 +496,6 @@ body {
     background: #3d50b8;
 }
 
-
-
-
-
-
 .icon-center-app{
    margin-left: 15px;
    height: 45px; 
@@ -368,7 +506,6 @@ body {
    align-items: center; 
    justify-content: center;
 }
-      
 
 .chat-icon {
     width:25px;

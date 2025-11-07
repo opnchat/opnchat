@@ -144,7 +144,41 @@ document.addEventListener('DOMContentLoaded', function() {
     loadConversations();
     setupEventListeners();
     setupNavigationListeners();
+    setupProfilePopup();
 });
+
+/**
+ * Configura o popup de perfil
+ */
+function setupProfilePopup() {
+    const userAvatarBtn = document.getElementById('userAvatarBtn');
+    const profilePopup = document.getElementById('profilePopup');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    // Toggle do popup ao clicar no avatar
+    userAvatarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        profilePopup.classList.toggle('active');
+    });
+    
+    // Fecha o popup ao clicar fora dele
+    document.addEventListener('click', (e) => {
+        if (!profilePopup.contains(e.target) && !userAvatarBtn.contains(e.target)) {
+            profilePopup.classList.remove('active');
+        }
+    });
+    
+    // Ação de logout
+    logoutBtn.addEventListener('click', () => {
+        // Fecha o popup
+        profilePopup.classList.remove('active');
+        
+        // Aguarda um pouco para animação e redireciona
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 200);
+    });
+}
 
 /**
  * Configura os event listeners da navegação lateral
