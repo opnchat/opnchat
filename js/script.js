@@ -39,14 +39,328 @@ const conversationsData = [
     }
 ];
 
+// Dados de exemplo dos grupos
+const groupsData = [
+    {
+        id: 101,
+        name: 'Equipe de Desenvolvimento',
+        lastMessage: 'Deploy realizado com sucesso',
+        time: '11:45',
+        avatar: 'ED',
+        members: 8
+    },
+    {
+        id: 102,
+        name: 'Marketing',
+        lastMessage: 'Campanha aprovada!',
+        time: '10:20',
+        avatar: 'MK',
+        members: 5
+    },
+    {
+        id: 103,
+        name: 'Diretoria',
+        lastMessage: 'Reunião amanhã às 9h',
+        time: 'Ontem',
+        avatar: 'DR',
+        members: 4
+    },
+    {
+        id: 104,
+        name: 'Suporte Técnico',
+        lastMessage: 'Ticket #234 resolvido',
+        time: 'Ontem',
+        avatar: 'ST',
+        members: 6
+    }
+];
+
+// Dados de exemplo dos participantes/usuários
+const participantsData = [
+    {
+        id: 201,
+        name: 'João Silva',
+        status: 'Online',
+        avatar: 'J',
+        department: 'TI'
+    },
+    {
+        id: 202,
+        name: 'Maria Santos',
+        status: 'Online',
+        avatar: 'M',
+        department: 'RH'
+    },
+    {
+        id: 203,
+        name: 'Pedro Oliveira',
+        status: 'Ausente',
+        avatar: 'P',
+        department: 'Vendas'
+    },
+    {
+        id: 204,
+        name: 'Ana Costa',
+        status: 'Online',
+        avatar: 'A',
+        department: 'Marketing'
+    },
+    {
+        id: 205,
+        name: 'Carlos Souza',
+        status: 'Offline',
+        avatar: 'C',
+        department: 'Financeiro'
+    },
+    {
+        id: 206,
+        name: 'Beatriz Lima',
+        status: 'Online',
+        avatar: 'B',
+        department: 'TI'
+    },
+    {
+        id: 207,
+        name: 'Rafael Mendes',
+        status: 'Ausente',
+        avatar: 'R',
+        department: 'Suporte'
+    },
+    {
+        id: 208,
+        name: 'Juliana Rocha',
+        status: 'Online',
+        avatar: 'JR',
+        department: 'Diretoria'
+    }
+];
+
 // Variável para armazenar a conversa ativa
 let activeConversationId = null;
+let currentView = 'chats'; // 'chats', 'groups', 'participants'
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
     loadConversations();
     setupEventListeners();
+    setupNavigationListeners();
 });
+
+/**
+ * Configura os event listeners da navegação lateral
+ */
+function setupNavigationListeners() {
+    const navChats = document.getElementById('navChats');
+    const navGroups = document.getElementById('navGroups');
+    const navParticipants = document.getElementById('navParticipants');
+    
+    navChats.addEventListener('click', () => {
+        setActiveNavIcon('navChats');
+        currentView = 'chats';
+        updateSidebarContent();
+    });
+    
+    navGroups.addEventListener('click', () => {
+        setActiveNavIcon('navGroups');
+        currentView = 'groups';
+        updateSidebarContent();
+    });
+    
+    navParticipants.addEventListener('click', () => {
+        setActiveNavIcon('navParticipants');
+        currentView = 'participants';
+        updateSidebarContent();
+    });
+}
+
+/**
+ * Atualiza o conteúdo da sidebar baseado na visualização atual
+ */
+function updateSidebarContent() {
+    const conversationsList = document.getElementById('conversationsList');
+    const sidebarTitle = document.getElementById('sidebarTitle');
+    const searchInput = document.getElementById('searchInput');
+    
+    // Limpa a lista atual
+    conversationsList.innerHTML = '';
+    
+    // Fecha chat se estiver aberto
+    document.getElementById('welcomeScreen').style.display = 'flex';
+    document.getElementById('chatContainer').style.display = 'none';
+    activeConversationId = null;
+    
+    switch(currentView) {
+        case 'chats':
+            sidebarTitle.textContent = 'Meu Chat';
+            searchInput.placeholder = 'Pesquisar ou começar uma nova conversa';
+            loadConversations();
+            break;
+            
+        case 'groups':
+            sidebarTitle.textContent = 'Grupos';
+            searchInput.placeholder = 'Pesquisar grupos';
+            loadGroups();
+            break;
+            
+        case 'participants':
+            sidebarTitle.textContent = 'Participantes';
+            searchInput.placeholder = 'Pesquisar participantes';
+            loadParticipants();
+            break;
+    }
+}
+
+/**
+ * Carrega os grupos na sidebar
+ */
+function loadGroups() {
+    const conversationsList = document.getElementById('conversationsList');
+    conversationsList.innerHTML = '';
+    
+    groupsData.forEach(group => {
+        const groupElement = document.createElement('div');
+        groupElement.className = 'conversation-item';
+        groupElement.dataset.id = group.id;
+        groupElement.innerHTML = `
+            <div class="avatar">${group.avatar}</div>
+            <div class="conversation-info">
+                <div class="conversation-header">
+                    <span class="conversation-name">${group.name}</span>
+                    <span class="conversation-time">${group.time}</span>
+                </div>
+                <div class="conversation-preview">${group.lastMessage} • ${group.members} membros</div>
+            </div>
+        `;
+        
+        groupElement.addEventListener('click', () => openGroup(group));
+        conversationsList.appendChild(groupElement);
+    });
+}
+
+/**
+ * Carrega os participantes na sidebar
+ */
+function loadParticipants() {
+    const conversationsList = document.getElementById('conversationsList');
+    conversationsList.innerHTML = '';
+    
+    participantsData.forEach(participant => {
+        const participantElement = document.createElement('div');
+        participantElement.className = 'conversation-item';
+        participantElement.dataset.id = participant.id;
+        
+        // Define a cor do status
+        let statusColor = '#gray';
+        if (participant.status === 'Online') statusColor = '#4CAF50';
+        else if (participant.status === 'Ausente') statusColor = '#FFA726';
+        else statusColor = '#9E9E9E';
+        
+        participantElement.innerHTML = `
+            <div class="avatar">${participant.avatar}</div>
+            <div class="conversation-info">
+                <div class="conversation-header">
+                    <span class="conversation-name">${participant.name}</span>
+                    <span class="conversation-time" style="color: ${statusColor}; font-weight: 500;">${participant.status}</span>
+                </div>
+                <div class="conversation-preview">${participant.department}</div>
+            </div>
+        `;
+        
+        participantElement.addEventListener('click', () => openParticipantChat(participant));
+        conversationsList.appendChild(participantElement);
+    });
+}
+
+/**
+ * Abre um grupo
+ * @param {Object} group - Objeto com dados do grupo
+ */
+function openGroup(group) {
+    activeConversationId = group.id;
+    
+    // Remove classe active de todos os itens
+    document.querySelectorAll('.conversation-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Adiciona classe active no grupo selecionado
+    const selectedItem = document.querySelector(`[data-id="${group.id}"]`);
+    if (selectedItem) {
+        selectedItem.classList.add('active');
+    }
+    
+    // Esconde tela de boas-vindas e mostra área de chat
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('chatContainer').style.display = 'flex';
+    
+    // Atualiza informações do cabeçalho do chat
+    document.getElementById('chatAvatar').textContent = group.avatar;
+    document.getElementById('contactName').textContent = group.name;
+    document.querySelector('.status').textContent = `${group.members} membros`;
+    
+    // Limpa mensagens anteriores
+    document.getElementById('messagesArea').innerHTML = '';
+    
+    // Adiciona mensagem de exemplo
+    addMessage('Bem-vindo ao grupo ' + group.name + '!', 'received');
+    
+    // Foca no input de mensagem
+    document.getElementById('messageInput').focus();
+}
+
+/**
+ * Abre chat com um participante
+ * @param {Object} participant - Objeto com dados do participante
+ */
+function openParticipantChat(participant) {
+    activeConversationId = participant.id;
+    
+    // Remove classe active de todos os itens
+    document.querySelectorAll('.conversation-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Adiciona classe active no participante selecionado
+    const selectedItem = document.querySelector(`[data-id="${participant.id}"]`);
+    if (selectedItem) {
+        selectedItem.classList.add('active');
+    }
+    
+    // Esconde tela de boas-vindas e mostra área de chat
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('chatContainer').style.display = 'flex';
+    
+    // Atualiza informações do cabeçalho do chat
+    document.getElementById('chatAvatar').textContent = participant.avatar;
+    document.getElementById('contactName').textContent = participant.name;
+    document.querySelector('.status').textContent = participant.status;
+    
+    // Limpa mensagens anteriores
+    document.getElementById('messagesArea').innerHTML = '';
+    
+    // Adiciona mensagem de exemplo
+    addMessage('Olá! Iniciando conversa com ' + participant.name, 'received');
+    
+    // Foca no input de mensagem
+    document.getElementById('messageInput').focus();
+}
+
+/**
+ * Define o ícone ativo na navegação
+ * @param {string} iconId - ID do ícone a ser ativado
+ */
+function setActiveNavIcon(iconId) {
+    // Remove classe active de todos os ícones
+    document.querySelectorAll('.nav-icon').forEach(icon => {
+        icon.classList.remove('active');
+    });
+    
+    // Adiciona classe active ao ícone selecionado
+    const activeIcon = document.getElementById(iconId);
+    if (activeIcon) {
+        activeIcon.classList.add('active');
+    }
+}
 
 /**
  * Carrega as conversas na sidebar
