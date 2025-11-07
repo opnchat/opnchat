@@ -1,0 +1,77 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interno</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar com lista de conversas -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="avatar">U</div>
+                    <h2>Meu Chat</h2>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Pesquisar ou começar uma nova conversa">
+            </div>
+
+            <div class="conversations-list" id="conversationsList">
+                <!-- Conversas serão carregadas aqui -->
+            </div>
+        </div>
+
+        <!-- Área principal do chat -->
+        <div class="chat-area">
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <h1>Chat Interno</h1>
+                    <p>Selecione uma conversa para começar a enviar mensagens</p>
+                </div>
+            </div>
+
+            <div class="chat-container" id="chatContainer" style="display: none;">
+                <!-- Header do chat -->
+                <div class="chat-header">
+                    <div class="contact-info">
+                        <div class="avatar" id="chatAvatar">U</div>
+                        <div class="contact-details">
+                            <h3 id="contactName">Nome do Contato</h3>
+                            <span class="status">Online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de mensagens -->
+                <div class="messages-area" id="messagesArea">
+                    <!-- Mensagens aparecerão aqui -->
+                </div>
+
+                <!-- Input de mensagem -->
+                <div class="message-input-container">
+                    <button class="attach-btn" id="attachBtn" title="Anexar arquivo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <input type="file" id="fileInput" style="display: none;">
+                    <input type="text" class="message-input" id="messageInput" placeholder="Digite uma mensagem">
+                    <button class="send-btn" id="sendBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
