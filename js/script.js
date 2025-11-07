@@ -191,7 +191,7 @@ function updateSidebarContent() {
     
     switch(currentView) {
         case 'chats':
-            sidebarTitle.textContent = 'Meu Chat';
+            sidebarTitle.textContent = 'Conversas';
             searchInput.placeholder = 'Pesquisar ou começar uma nova conversa';
             loadConversations();
             break;

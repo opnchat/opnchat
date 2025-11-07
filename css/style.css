@@ -243,8 +243,8 @@ body {
     padding: 20px;
     overflow-y: auto;
     background-color: #e8f4f8;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><defs><style>.icon{fill:%234C63D2;opacity:0.04;}</style></defs><g class="icon"><path d="M50,80 Q50,70 60,70 L85,70 Q95,70 95,80 L95,100 Q95,110 85,110 L65,110 L52,125 L52,110 Q50,110 50,100 Z"/></g><g class="icon"><circle cx="320" cy="45" r="20"/><path d="M300,80 Q300,65 315,65 L325,65 Q340,65 340,80 L340,88 L300,88 Z" fill="%234C63D2" opacity="0.04"/></g><g class="icon"><rect x="180" y="35" width="45" height="35" rx="6" class="icon"/><circle cx="202" cy="52" r="10" fill="%23e8f4f8"/><polygon points="180,70 202,52 225,70" fill="%23e8f4f8"/></g><g class="icon"><path d="M140,180 L165,180 L152,160 Z M145,188 L160,188 L152,203 Z" class="icon"/></g><g class="icon"><path d="M280,240 Q280,230 290,230 L310,230 Q320,230 320,240 L320,258 Q320,268 310,268 L295,268 L282,280 L282,268 Q280,268 280,258 Z"/></g><g class="icon"><circle cx="85" cy="280" r="18"/><path d="M68,310 Q68,298 80,298 L90,298 Q102,298 102,310 L102,318 L68,318 Z" fill="%234C63D2" opacity="0.04"/></g><g class="icon"><rect x="350" y="200" width="38" height="30" rx="5" class="icon"/><circle cx="369" cy="215" r="8" fill="%23e8f4f8"/><polygon points="350,230 369,215 388,230" fill="%23e8f4f8"/></g><g class="icon"><path d="M30,350 L50,350 L40,335 Z M35,355 L45,355 L40,367 Z" class="icon"/></g><g class="icon"><circle cx="240" cy="340" r="16"/><path d="M225,365 Q225,355 235,355 L245,355 Q255,355 255,365 L255,372 L225,372 Z" fill="%234C63D2" opacity="0.04"/></g><g class="icon"><path d="M370,330 Q370,320 380,320 L395,320 Q405,320 405,330 L405,345 Q405,355 395,355 L382,355 L372,365 L372,355 Q370,355 370,345 Z"/></g></svg>');
-    background-size: 400px 400px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500"><defs><style>.icon{fill:none;stroke:%234C63D2;stroke-width:2;opacity:0.06;stroke-linecap:round;stroke-linejoin:round;}</style></defs><path class="icon" d="M40,60 Q40,50 50,50 L75,50 Q85,50 85,60 L85,80 Q85,90 75,90 L58,90 L45,102 L45,90"/><circle class="icon" cx="320" cy="55" r="18"/><path class="icon" d="M302,85 Q302,73 314,73 L326,73 Q338,73 338,85 L338,90"/><rect class="icon" x="180" y="40" width="40" height="35" rx="5"/><circle class="icon" cx="200" cy="57" r="8"/><path class="icon" d="M185,75 L200,62 L215,75"/><path class="icon" d="M450,80 L470,80 M460,70 L460,90"/><path class="icon" d="M140,190 L160,190 L150,172 M147,195 L153,195 L150,205"/><path class="icon" d="M280,250 Q280,240 290,240 L312,240 Q322,240 322,250 L322,270 Q322,280 312,280 L293,280 L280,292 L280,280"/><circle class="icon" cx="85" cy="290" r="16"/><path class="icon" d="M70,318 Q70,308 80,308 L90,308 Q100,308 100,318 L100,323"/><rect class="icon" x="420" y="180" width="35" height="30" rx="4"/><circle class="icon" cx="437" cy="195" r="7"/><path class="icon" d="M425,210 L437,200 L449,210"/><path class="icon" d="M25,360 L42,360 L33,345 M30,365 L36,365 L33,374"/><circle class="icon" cx="240" cy="350" r="15"/><path class="icon" d="M226,372 Q226,363 235,363 L245,363 Q254,363 254,372 L254,377"/><path class="icon" d="M380,340 Q380,330 390,330 L408,330 Q418,330 418,340 L418,358 Q418,368 408,368 L392,368 L380,380 L380,368"/><path class="icon" d="M160,420 L177,420 M168,410 L168,430"/><rect class="icon" x="70" y="450" width="38" height="32" rx="5"/><circle class="icon" cx="89" cy="466" r="7"/><path class="icon" d="M76,481 L89,471 L102,481"/><path class="icon" d="M290,430 Q290,420 300,420 L318,420 Q328,420 328,430 L328,448 Q328,458 318,458 L302,458 L290,470 L290,458"/><circle class="icon" cx="440" cy="420" r="14"/><path class="icon" d="M428,442 Q428,434 436,434 L444,434 Q452,434 452,442 L452,447"/><path class="icon" d="M350,140 L365,140 L357,126 M354,145 L360,145 L357,153"/><circle class="icon" cx="480" cy="260" r="16"/><path class="icon" d="M466,284 Q466,275 475,275 L485,275 Q494,275 494,284 L494,289"/><path class="icon" d="M30,180 L45,180 M37,170 L37,190"/><rect class="icon" x="220" y="160" width="36" height="30" rx="4"/><circle class="icon" cx="238" cy="175" r="7"/><path class="icon" d="M226,190 L238,181 L250,190"/></svg>');
+    background-size: 500px 500px;
 }
 
 .message {
@@ -351,4 +351,30 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #3d50b8;
+}
+
+
+
+
+
+
+.icon-center-app{
+   margin-left: 15px;
+   height: 45px; 
+   width: 45px; 
+   background-color: #4C63D2; 
+   border-radius: 100%; 
+   display: flex; 
+   align-items: center; 
+   justify-content: center;
+}
+      
+
+.chat-icon {
+    width:25px;
+    stroke: white;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }

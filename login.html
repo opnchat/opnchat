@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>opnchat - Conecte-se</title>
+    <link rel="shortcut icon" href="assets/logo_opn_chat.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ebedf8 0%, #e9ecfd 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-wrapper {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .chat-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #5d74db 0%, #4C63D2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(76, 99, 210, 0.3);
+        }
+
+        .chat-icon svg {
+            width: 42px;
+            height: 42px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .logo-text {
+            font-size: 56px;
+            font-weight: bold;
+            color: #4C63D2;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 20px;
+            color: #333;
+            line-height: 1.4;
+            margin-top: 10px;
+            max-width: 480px;
+        }
+
+        .right-section {
+            flex: 0 0 400px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #4C63D2;
+            box-shadow: 0 0 0 2px rgba(76, 99, 210, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: #90949c;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #5d74db 0%, #4C63D2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #4C63D2 0%, #3d50b8 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(76, 99, 210, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            margin: 20px 0;
+            border-top: 1px solid #dadde1;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .forgot-password a {
+            color: #4C63D2;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+            border-left: 4px solid #c62828;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        @media (max-width: 900px) {
+            .login-wrapper {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .left-section {
+                align-items: center;
+                text-align: center;
+            }
+
+            .logo-text {
+                font-size: 48px;
+            }
+
+            .tagline {
+                font-size: 24px;
+            }
+
+            .right-section {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .logo-text {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 20px;
+            }
+
+            .chat-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .chat-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            .right-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="left-section">
+            <div class="logo-container">
+                <div class="chat-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <div class="logo-text">opnchat</div>
+            </div>
+            <p class="tagline">
+                O opnchat é um sistema de mensagens criado para facilitar a comunicação de forma simples, prática e intuitiva, com o diferencial de ser totalmente gratuita open-source! <br><br> <span style="font-weight: bold; font-size: 16px;">Criado com carinho por:</span> <span style="font-size: 16px;"><a href="https://"></a> André Lima</span>
+            </p>
+        </div>
+
+        <div class="right-section">
+            <div id="errorMessage" class="error-message">
+                Usuário ou senha incorretos!
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Usuário"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Senha"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">Entrar</button>
+
+                <div class="forgot-password">
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            errorMessage.classList.remove('show');
+            
+            if (username === 'admin' && password === 'admin') {
+                const button = document.querySelector('.btn-login');
+                button.textContent = 'Entrando...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 500);
+            } else {
+                errorMessage.classList.add('show');
+                document.getElementById('password').value = '';
+                document.getElementById('username').focus();
+            }
+        });
+
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+        
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMessage').classList.remove('show');
+        });
+    </script>
+</body>
+</html>
